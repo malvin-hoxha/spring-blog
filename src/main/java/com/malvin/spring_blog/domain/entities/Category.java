@@ -23,6 +23,9 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "category")
+    private List<Post> posts = new ArrayList<>();
+
     @Override
     public int hashCode() {
         final int prime = 31;
