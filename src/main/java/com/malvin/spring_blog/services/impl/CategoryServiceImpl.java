@@ -1,6 +1,8 @@
 package com.malvin.spring_blog.services.impl;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import com.malvin.spring_blog.repositories.CategoryRepository;
@@ -31,5 +33,17 @@ public class CategoryServiceImpl implements CategoryService {
             throw new IllegalArgumentException("Category with name '" + categoryName + "' already exists.");
         }
         return categoryRepository.save(category);
+    }
+
+    @Override
+    public void deleteCategory(UUID id) {
+        Optional<Category> category = categoryRepository.findById(id);
+
+        if (category.isPresent()) {
+            if (category.get().getPosts().size() > 0) {
+                throw new IllegalArgumentException("Category has associated posts and cannot be deleted.");
+            }
+            categoryRepository.deleteById(id);
+        }
     }
 }
