@@ -10,12 +10,15 @@ import org.mapstruct.ReportingPolicy;
 import com.malvin.spring_blog.domain.entities.Category;
 import com.malvin.spring_blog.domain.PostStatus;
 import com.malvin.spring_blog.domain.dtos.CategoryDto;
+import com.malvin.spring_blog.domain.dtos.CreateCategoryRequest;
 import com.malvin.spring_blog.domain.entities.Post;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CategoryMapper {
-    @Mapping(target = "postCount", source="posts", qualifiedByName = "calculatePostCount")
+    @Mapping(target = "postCount", source = "posts", qualifiedByName = "calculatePostCount")
     CategoryDto toDto(Category category);
+
+    Category toEntity(CreateCategoryRequest createCategoryRequest);
 
     @Named("calculatePostCount")
     default long calculatePostCount(List<Post> posts) {
@@ -23,5 +26,5 @@ public interface CategoryMapper {
             return 0;
         }
         return posts.stream().filter(post -> PostStatus.PUBLISHED.equals(post.getStatus())).count();
-    }   
+    }
 }
