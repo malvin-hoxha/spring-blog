@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -24,7 +23,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<Post> posts = new ArrayList<>();
+    private final List<Post> posts = new ArrayList<>();
 
     @Override
     public int hashCode() {
@@ -57,5 +56,4 @@ public class Category {
         return true;
     }
 
-    
 }

@@ -18,11 +18,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "users")
-@NoArgsConstructor 
-@AllArgsConstructor 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter 
-@Builder 
+@Setter
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -41,7 +41,7 @@ public class User {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts = new ArrayList<>();
+    private final List<Post> posts = new ArrayList<>();
 
     @Override
     public int hashCode() {
@@ -92,10 +92,9 @@ public class User {
         return true;
     }
 
-    @PrePersist 
+    @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
-    
-    
+
 }

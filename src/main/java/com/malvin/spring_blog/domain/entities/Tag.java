@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private Set<Post> posts = new HashSet<>();
+    private final Set<Post> posts = new HashSet<>();
 
     @Override
     public int hashCode() {
@@ -58,5 +57,4 @@ public class Tag {
         return true;
     }
 
-    
 }
