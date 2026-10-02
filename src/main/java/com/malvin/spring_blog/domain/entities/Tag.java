@@ -24,7 +24,7 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private final Set<Post> posts = new HashSet<>();
+    private Set<Post> posts = new HashSet<>();
 
     @Override
     public int hashCode() {
