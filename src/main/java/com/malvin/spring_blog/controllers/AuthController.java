@@ -33,5 +33,4 @@ public class AuthController {
                 .build();
         return ResponseEntity.ok(authResponse);
     }
-
 }
